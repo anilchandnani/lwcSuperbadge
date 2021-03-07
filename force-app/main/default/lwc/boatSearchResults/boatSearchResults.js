@@ -1,17 +1,26 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, wire } from 'lwc';
 import getBoats from '@salesforce/apex/BoatDataService.getBoats';
 
 export default class BoatSearchResults extends LightningElement {
-    @api searchBoats(boatTypeId){
+    boats;
+    boatTypeId;
+    selectedBoatId;
+
+    @api searchBoats(boatTypeId) {
+        this.boatTypeId = boatTypeId;
         this.dispatchEvent(new CustomEvent('loading'));
-        getBoats({"boatTypeId" : boatTypeId})
-        .then(boats => {
-            this.dispatchEvent(new CustomEvent('doneloading'));
-            //alert(boats.length);
-        })
-        .catch(error => {
-            this.dispatchEvent(new CustomEvent('doneloading'));
-            //alert(error);
-        });
+    }
+
+    @wire(getBoats, { boatTypeId: '$boatTypeId' })
+    wiredBoats(result) {
+        this.boats = result;
+        if (result.error) {
+
+        }
+        this.dispatchEvent(new CustomEvent('doneloading'));
+    }
+
+    updateSelectedTile(event) {
+        this.selectedBoatId = event.detail.boatId;
     }
 }
