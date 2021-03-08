@@ -1,3 +1,28 @@
 <template>
-    test
+    <lightning-tabset variant="scoped">
+        <lightning-tab label={label.details}>
+            <span if:false={boatId} class="slds-align_absolute-center no-boat-height">
+                {label.noBoatSelected}
+            </span>
+            <lightning-card if:true={boatId} title={boatName} icon-name={detailsTabIconName}>
+                <lightning-button slot="actions" name={label.fullDetails} label={label.fullDetails} onclick={navigateToRecordViewPage}></lightning-button>
+                <lightning-record-view-form record-id={boatId} object-api-name="Boat__c">
+                    <lightning-output-field field-name="BoatType__c">
+                    </lightning-output-field>
+                    <lightning-output-field field-name="Length__c">
+                    </lightning-output-field>
+                    <lightning-output-field field-name="Price__c">
+                    </lightning-output-field>
+                    <lightning-output-field field-name="Description__c">
+                    </lightning-output-field>
+                </lightning-record-view-form>
+            </lightning-card>
+        </lightning-tab>
+        <lightning-tab label={label.reviews} value="reviews">
+            <c-boat-reviews></c-boat-reviews>
+        </lightning-tab>
+        <lightning-tab label={label.addReview}>
+            <c-boat-add-review-form oncreatereview={handleReviewCreated} boat-id={boatId}></c-boat-add-review-form>
+        </lightning-tab>
+    </lightning-tabset>
 </template>
