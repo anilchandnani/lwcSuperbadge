@@ -1,9 +1,9 @@
 import { LightningElement, wire } from 'lwc';
-import noBoatSelected from '@salesforce/label/c.Please_select_a_boat';
-import details from '@salesforce/label/c.Details';
-import fullDetails from '@salesforce/label/c.Full_Details';
-import reviews from '@salesforce/label/c.Reviews';
-import addReview from '@salesforce/label/c.Add_Review';
+import labelPleaseSelectABoat from '@salesforce/label/c.Please_select_a_boat';
+import labelDetails from '@salesforce/label/c.Details';
+import labelFullDetails from '@salesforce/label/c.Full_Details';
+import labelReviews from '@salesforce/label/c.Reviews';
+import labelAddReview from '@salesforce/label/c.Add_Review';
 import { getRecord,getFieldValue  } from 'lightning/uiRecordApi';
 import IdField from '@salesforce/schema/Boat__c.Id';
 import NameField from '@salesforce/schema/Boat__c.Name';
@@ -20,7 +20,7 @@ export default class BoatDetailTabs extends NavigationMixin(LightningElement) {
     subscription = null;
 
     boatId;
-    label = {noBoatSelected , details, fullDetails, reviews, addReview};
+    label = {labelPleaseSelectABoat , labelDetails, labelFullDetails, labelReviews, labelAddReview};
 
     @wire(MessageContext)
         messageContext;
@@ -51,5 +51,9 @@ export default class BoatDetailTabs extends NavigationMixin(LightningElement) {
                 actionName: 'view'
             },
         });
+    }
+
+    handleReviewCreated(event){
+        this.template.querySelector('lightning-tabset').activeTabValue = 'reviews';
     }
 }
