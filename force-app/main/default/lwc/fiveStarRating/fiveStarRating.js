@@ -2,7 +2,7 @@
 import { LightningElement, api } from 'lwc';
 import fivestar from '@salesforce/resourceUrl/fivestar'
 import { loadStyle, loadScript } from 'lightning/platformResourceLoader';
-import { showToastEvent } from 'lightning/platformShowToastEvent';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 // add constants here
 const ERROR_TITLE = 'Error loading five-star';
 const ERROR_VARIANT = 'error';
@@ -40,10 +40,9 @@ export default class FiveStarRating extends LightningElement {
       this.initializeRating();
     })
     .catch(error=>{
-      this.dispatchEvent(new showToastEvent({
+      this.dispatchEvent(new ShowToastEvent({
         title : ERROR_TITLE,
-        variant : ERROR_VARIANT,
-        message : error 
+        variant : ERROR_VARIANT
       }));
     })
   }

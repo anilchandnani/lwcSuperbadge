@@ -5,13 +5,13 @@ import labelFullDetails from '@salesforce/label/c.Full_Details';
 import labelReviews from '@salesforce/label/c.Reviews';
 import labelAddReview from '@salesforce/label/c.Add_Review';
 import { getRecord,getFieldValue  } from 'lightning/uiRecordApi';
-import IdField from '@salesforce/schema/Boat__c.Id';
-import NameField from '@salesforce/schema/Boat__c.Name';
+import BOAT_ID_FIELD from '@salesforce/schema/Boat__c.Id';
+import BOAT_NAME_FIELD from '@salesforce/schema/Boat__c.Name';
 import { subscribe, APPLICATION_SCOPE, MessageContext} from 'lightning/messageService';
 import BOATMC from '@salesforce/messageChannel/BoatMessageChannel__c';
 import { NavigationMixin } from 'lightning/navigation';
 
-const BOAT_FIELDS = [NameField, IdField];
+const BOAT_FIELDS = [BOAT_ID_FIELD, BOAT_NAME_FIELD];
 
 export default class BoatDetailTabs extends NavigationMixin(LightningElement) {
 
@@ -55,5 +55,6 @@ export default class BoatDetailTabs extends NavigationMixin(LightningElement) {
 
     handleReviewCreated(event){
         this.template.querySelector('lightning-tabset').activeTabValue = 'reviews';
+        this.template.querySelector('c-boat-reviews').refresh();
     }
 }

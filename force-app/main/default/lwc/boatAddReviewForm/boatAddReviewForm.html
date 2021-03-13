@@ -1,13 +1,30 @@
 <template>
-    <lightning-record-edit-form object-api-name="BoatReview__c" onsuccess={handleSuccess} onsubmit={handleSubmit}>
+    <lightning-record-edit-form object-api-name={boatReviewObject} onsuccess={handleSuccess} onsubmit={handleSubmit}>
         <lightning-messages></lightning-messages>
-        <div class="slds-form-element__label">
-            Review Subject
+        <lightning-layout multiple-rows vertical-align="start">
+            <lightning-layout-item size="8" padding="horizontal-small">
+                <div class="slds-form-element">
+                    {labelSubject}
+                    <lightning-input-field variant="label-hidden" field-name={nameField}></lightning-input-field>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout-item size="4" padding="horizontal-small">
+            <div class="slds-form-element">
+                <label class="slds-form-element__label" for="record-name">{labelRating}</label>
+                <div class="slds-form-element__control">
+                    <c-five-star-rating onratingchange={handleRatingChanged} value={rating}></c-five-star-rating>
+                </div>
+            </div>
+        </lightning-layout-item>
+        <lightning-layout-item padding="horizontal-small">
+            <lightning-input-field field-name={commentField}></lightning-input-field>
+        </lightning-layout-item>
+
+        <div class="slds-align_absolute-center" style="margin-top: 5px">
+            <lightning-button icon-name="utility:save" type="submit" name="save" label="Submit">
+            </lightning-button>
         </div>
-        <lightning-input-field variant="label-hidden" field-name='Name'></lightning-input-field>
-        <c-five-star-rating></c-five-star-rating>
-        <lightning-input-field field-name='Comment__c'></lightning-input-field>
-        <lightning-button icon-name="utility:save" type="submit" name="save" label="Submit">
-        </lightning-button>
+
     </lightning-record-edit-form>
 </template>
