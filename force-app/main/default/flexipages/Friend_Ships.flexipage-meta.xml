@@ -19,7 +19,7 @@
         <type>Region</type>
     </flexiPageRegions>
     <flexiPageRegions>
-    <itemInstances>
+        <itemInstances>
             <componentInstance>
                 <componentName>boatMap</componentName>
             </componentInstance>
